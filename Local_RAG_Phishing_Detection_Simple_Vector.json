@@ -1,5 +1,5 @@
 {
-  "name": "Docling_Phishing_RAG",
+  "name": "Phishing_RAG",
   "nodes": [
     {
       "parameters": {
@@ -17,7 +17,7 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -520,
+        -460,
         -480
       ],
       "id": "99d783b3-3657-4392-ad26-80f80fc745f0",
@@ -51,8 +51,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
       "position": [
-        -60,
-        20
+        -300,
+        -40
       ],
       "id": "3ecdbe7d-0a00-4daf-8402-5543030f0a32",
       "name": "Embeddings Ollama",
@@ -65,29 +65,14 @@
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $json['Mail Body'] }} \"determine whether the above is a spam or not\"",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        -320,
-        -480
-      ],
-      "id": "b0067df3-0318-4ff9-8dda-1661208d950a",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
         "model": "incept5/llama3.1-claude:latest",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        -280,
-        -140
+        -300,
+        -280
       ],
       "id": "58439bda-2df4-428d-970a-fe1c24b25a1d",
       "name": "Ollama Chat Model",
@@ -119,8 +104,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -1100,
-        -520
+        -1280,
+        -460
       ],
       "id": "95846e00-d45f-41f3-bb65-857d62914d2e",
       "name": "DataSet Submission",
@@ -138,7 +123,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        -880,
+        -984,
         -520
       ],
       "id": "ab975b84-a3a6-435b-8524-d2ce144008f4",
@@ -151,8 +136,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        -820,
-        -260
+        -880,
+        -297.5
       ],
       "id": "5e39bde1-385c-4ee6-959b-1e34cccc0d6b",
       "name": "Default Data Loader"
@@ -164,8 +149,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOllama",
       "typeVersion": 1,
       "position": [
-        -1000,
-        -280
+        -980,
+        -320
       ],
       "id": "cbc3ccf5-ea9d-4de0-871e-1d190b70ec68",
       "name": "Embeddings Ollama1",
@@ -183,11 +168,56 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        -840,
-        -80
+        -860,
+        -140
       ],
       "id": "b64827dc-96bf-4a01-bb1f-203dc8da1d41",
       "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "content": "## Vector Store Creation node",
+        "height": 620,
+        "width": 740
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1300,
+        -580
+      ],
+      "id": "87e14ebe-11ed-450d-b785-5052cb2b4680",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Phishing Identification Node",
+        "height": 620,
+        "width": 660
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        -540
+      ],
+      "id": "149d7b00-a950-4379-b5e7-7446d1941e6c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json['Mail Body'] }} \"determine whether the above is a spam or not\"",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -480
+      ],
+      "id": "b0067df3-0318-4ff9-8dda-1661208d950a",
+      "name": "Phishing Identifier"
     }
   ],
   "pinData": {},
@@ -196,7 +226,7 @@
       "main": [
         [
           {
-            "node": "AI Agent",
+            "node": "Phishing Identifier",
             "type": "main",
             "index": 0
           }
@@ -221,7 +251,7 @@
       "ai_tool": [
         [
           {
-            "node": "AI Agent",
+            "node": "Phishing Identifier",
             "type": "ai_tool",
             "index": 0
           }
@@ -232,7 +262,7 @@
       "ai_languageModel": [
         [
           {
-            "node": "AI Agent",
+            "node": "Phishing Identifier",
             "type": "ai_languageModel",
             "index": 0
           }
@@ -288,7 +318,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "3b40887c-7a0b-4ee1-afac-f836955b842e",
+  "versionId": "4d3069ac-982b-4b93-bf00-0a33901872a4",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "c19d5559e050753b53fa52404dbead0e75c835c92dcfe537aab19417ddd5846b"
